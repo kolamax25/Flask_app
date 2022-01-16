@@ -33,16 +33,16 @@ def add_task():
         },400)
 
     data = {
-        'Contact': request.json['contact'],
+        'contact': request.json['contact'],
         'Name': request.json.get('Name', ""),
         'id': datas[-1]['id'] + 1,
         'done': False
     }
-    datas.append(data)
+    data.append(contact)
     return jsonify({
-            "status" : "Success",
-            "message" : "Contact added!"
-        })
+        "status":"success",
+        "message": "Contact added succesfully!"
+    })
 
 
 @app.route("/get-data")
