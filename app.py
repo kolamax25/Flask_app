@@ -5,15 +5,15 @@ app = Flask(__name__)
 datas = [
     {
         'contact': '9987644456',
-        'Name' : u'Buy groceries',
+        'Name' : 'Raju Rastogi',
         'id': 1,
         'done'  :False
 
     },
     {
 
-        'contact': 2,
-        'Name': u'Learn Python',
+        'contact': 9876543222,
+        'Name': "Farhan Qureshi',
         'id': 2, 
         'done': False        
 
@@ -25,7 +25,7 @@ def hello_world():
     return "Hello Friend!"
 
 @app.route("/add-data", methods = ["POST"])
-def add_task():
+def add_contact():
     if not request.json:
         return jsonify({
             "status" : "error",
@@ -46,7 +46,7 @@ def add_task():
 
 
 @app.route("/get-data")
-def getTask():
+def getContacts():
     return jsonify({
         "data" : datas
     })
