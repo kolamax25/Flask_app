@@ -1,55 +1,47 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-datas = [
+contacts = [
     {
-        'contact': '9987644456',
-        'Name' : 'Raju Rastogi',
-        'id': 1,
-        'done'  :False
-
+        "id": 1,
+        "Contact": "99876444560",
+        "Name": "Raju Rastogi",
+        "done": False
     },
     {
-
-        'contact': 9876543222,
-        'Name': "Farhan Qureshi',
-        'id': 2, 
-        'done': False        
-
-    }
+        "id": 2,
+        "Contact": "9876543222",
+        "Name": "Farhan Qureshi",
+        "done": False
+    },
 ]
 
-@app.route("/")
-def hello_world():
-    return "Hello Friend!"
 
-@app.route("/add-data", methods = ["POST"])
-def add_contact():
+@app.route("/add-data", methods=['POST'])
+def add_data():
     if not request.json:
         return jsonify({
-            "status" : "error",
-            "message" : "Please provide the data!"
-        },400)
-
-    data = {
-        'contact': request.json['contact'],
-        'Name': request.json.get('Name', ""),
-        'id': datas[-1]['id'] + 1,
+            "Status": "Error 400",
+            "Message": "Data not Provided"
+        }, 400)
+    contact = {
+        'id': contacts[-1]['id'] + 1,
+        'Name': request.json['Name'],
+        'Contact': request.json.get('Contact', ""),
         'done': False
     }
-    data.append(contact)
+    contacts.append(contact)
     return jsonify({
-        "status":"success",
-        "message": "Contact added succesfully!"
+        "Status": "Sucess",
+        "Message": "Task Added Sucessfully"
     })
-
 
 @app.route("/get-data")
-def getContacts():
+def get_data():
     return jsonify({
-        "data" : datas
+        "data":contacts
     })
 
-if (__name__ == "__main__"):
+if __name__=="__main__":
     app.run(debug=True)
